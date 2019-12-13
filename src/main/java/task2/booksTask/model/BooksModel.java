@@ -1,28 +1,17 @@
-package task2.booksTask;
+package task2.booksTask.model;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Random;
 
 public class BooksModel {
     private Book[] arrayOfBooks;
-    private String[] currentAuthorsNames;
-    private String[] currentPublishers;
-    private BookCreator bookCreator = new BookCreator();
 
-    public BooksModel (){
-        createSetOfBooks();
-        fillCurrentAuthors();
-        fillCurrentPublishers();
+    public BooksModel(){
+        generateNewBooks();
     }
 
-    public void createSetOfBooks() {
-        Random random = new Random();
-        Book[] books = new Book[random.nextInt(20) + 10];
-        for (int i = 0; i < books.length; i++) {
-            books[i] = bookCreator.generateBookObject();
-        }
-        this.arrayOfBooks = books;
+    public void generateNewBooks(){
+        arrayOfBooks = new BookArrayCreator().createSetOfBooks();
     }
 
     public Book[] getBookByAuthor(String authorName) {
@@ -58,40 +47,36 @@ public class BooksModel {
         return Arrays.copyOfRange(books, 0, index, Book[].class);
     }
 
-    public void sortByPublisher() {
-        Arrays.sort(arrayOfBooks, new Comparator<Book>() {
-            @Override
-            public int compare(Book book1, Book book2) {
-                return book1.getPublisher().compareToIgnoreCase(book2.getPublisher());
-            }
-        });
-
+    public Book[] sortByPublisher(Comparator comparator) {
+        Book[] sortedArr = Arrays.copyOf(arrayOfBooks, arrayOfBooks.length);
+        Arrays.sort(sortedArr, comparator);
+        return sortedArr;
     }
 
-    private void fillCurrentAuthors() {
-        String[] authorNames = new String[this.arrayOfBooks.length];
+    public String[] getCurrentAuthors() {
+        String[] authorNames = new String[arrayOfBooks.length];
         int index = 0;
-        for (int i = 0; i < this.arrayOfBooks.length; i++) {
+        for (int i = 0; i < arrayOfBooks.length; i++) {
             for (String name : authorNames) {
                 if(name == null){
-                    authorNames[index++] = this.arrayOfBooks[i].getAuthor();
+                    authorNames[index++] = arrayOfBooks[i].getAuthor();
                     break;
                 }
-                if (this.arrayOfBooks[i].getAuthor().contains(name)) {
+                if (arrayOfBooks[i].getAuthor().contains(name)) {
                     break;
                 }
             }
         }
-        this.currentAuthorsNames = Arrays.copyOfRange(authorNames, 0, index, String[].class);
+        return Arrays.copyOfRange(authorNames, 0, index, String[].class);
     }
 
-    private void fillCurrentPublishers() {
-        String[] publisherNames = new String[this.arrayOfBooks.length];
+    public String[] getCurrentPublishers() {
+        String[] publisherNames = new String[arrayOfBooks.length];
         int index = 0;
-        for (int i = 0; i < this.arrayOfBooks.length; i++) {
+        for (int i = 0; i < arrayOfBooks.length; i++) {
             for (String name : publisherNames) {
                 if(name == null){
-                    publisherNames[index++] = this.arrayOfBooks[i].getPublisher();
+                    publisherNames[index++] = arrayOfBooks[i].getPublisher();
                     break;
                 }
                 if (this.arrayOfBooks[i].getPublisher().contains(name)) {
@@ -99,15 +84,8 @@ public class BooksModel {
                 }
             }
         }
-        this.currentPublishers = Arrays.copyOfRange(publisherNames, 0, index, String[].class);
-    }
-
-    public String[] getCurrentAuthorsNames() {
-        return currentAuthorsNames;
-    }
-
-    public String[] getCurrentPublishers() {
-        return currentPublishers;
+        publisherNames = Arrays.copyOfRange(publisherNames, 0, index, String[].class);
+        return publisherNames;
     }
 
     public Book[] getArrayOfBooks() {

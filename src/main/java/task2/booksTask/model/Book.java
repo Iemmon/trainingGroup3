@@ -1,4 +1,4 @@
-package task2.booksTask;
+package task2.booksTask.model;
 
 public class Book {
 
@@ -26,7 +26,7 @@ public class Book {
                 String.format("%-18s %d", "year: ", year) + '\n' +
                 String.format("%-18s %d", "number of pages: ", numOfPages) + '\n' +
                 String.format("%-18s %.2f", "price: ", price) + '\n' +
-                "-------------------------------------";
+                "-------------------------------------" + "\n";
     }
 
     public String getAuthor() {
