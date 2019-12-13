@@ -1,4 +1,4 @@
-package task2.shapesTask;
+package task2.shapesTask.model.entity;
 
 public class Triangle extends Shape {
     private final String SHAPE_NAME = "triangle";
@@ -6,8 +6,6 @@ public class Triangle extends Shape {
     private int side2;
     private int side3;
     private double halfPerimeter;
-
-    private int area;
 
     public Triangle(Color shapeColor, int side1, int side2, int side3) {
         super(shapeColor);
@@ -27,18 +25,9 @@ public class Triangle extends Shape {
         return super.getShapeColor();
     }
 
-    public int getArea() {
-        return area;
-    }
-
     @Override
     public double calcArea() {
         double area = Math.sqrt(halfPerimeter * (halfPerimeter - side1) * (halfPerimeter - side2) * (halfPerimeter - side3));
         return area;
-    }
-
-    @Override
-    public void draw() {
-        System.out.printf("%s; area=%.2f\n", this, calcArea());
     }
 }

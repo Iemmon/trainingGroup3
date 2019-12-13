@@ -1,21 +1,20 @@
-package task2.shapesTask;
+package task2.shapesTask.view;
 
 import java.util.Scanner;
 
 public class InputUtility {
     private static Scanner scanner = new Scanner(System.in);
 
-    public static int inputMenuNumber(ShapesView view, String message, int menuLimit) {
+    public static int inputMenuNumber(ShapeView view, int limit) {
         int input;
         do {
-            view.printMessage(message);
+            view.print("Choose option from above");
             while (!scanner.hasNextInt()) {
-                view.printMessage(view.WRONG_INPUT);
+                view.print(view.WRONG_INPUT);
                 scanner.next();
             }
             input = scanner.nextInt();
-        } while (input <= 0 || input > menuLimit);
+        } while (input < 1 || input > limit);
         return input;
     }
-
 }

@@ -1,6 +1,6 @@
-package task2.shapesTask;
+package task2.shapesTask.model.entity;
 
-public class Rectangle  extends Shape{
+public class Rectangle  extends Shape {
     private final String SHAPE_NAME = "rectangle";
     private double width;
     private double height;
@@ -19,10 +19,5 @@ public class Rectangle  extends Shape{
     @Override
     public double calcArea() {
         return width * height;
-    }
-
-    @Override
-    public void draw(){
-        System.out.printf("%s; area=%.2f\n", this, calcArea());
     }
 }

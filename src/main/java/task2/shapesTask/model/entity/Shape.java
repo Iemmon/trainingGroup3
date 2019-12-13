@@ -1,4 +1,7 @@
-package task2.shapesTask;
+package task2.shapesTask.model.entity;
+
+import com.sun.javafx.binding.StringFormatter;
+import task2.shapesTask.model.Drawable;
 
 public abstract class Shape implements Drawable {
     private Color shapeColor;
@@ -17,5 +20,10 @@ public abstract class Shape implements Drawable {
     }
 
     public abstract double calcArea();
+
+    @Override
+    public String draw() {
+        return String.format("%s; area=%.2f\n", this,  calcArea());
+    }
 
 }
