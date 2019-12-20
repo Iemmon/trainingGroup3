@@ -47,9 +47,14 @@ public class BooksModel {
         return Arrays.copyOfRange(books, 0, index, Book[].class);
     }
 
-    public Book[] sortByPublisher(Comparator comparator) {
+    public Book[] sortByPublisher() {
         Book[] sortedArr = Arrays.copyOf(arrayOfBooks, arrayOfBooks.length);
-        Arrays.sort(sortedArr, comparator);
+        Arrays.sort(sortedArr, new Comparator<Book>() {
+            @Override
+            public int compare(Book b1, Book b2) {
+                return b1.getPublisher().compareToIgnoreCase(b2.getPublisher());
+            }
+        });
         return sortedArr;
     }
 
@@ -92,5 +97,7 @@ public class BooksModel {
         return arrayOfBooks;
     }
 
-
+    public void setArrayOfBooks(Book[] arrayOfBooks) {
+        this.arrayOfBooks = arrayOfBooks;
+    }
 }
