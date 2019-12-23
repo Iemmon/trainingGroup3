@@ -1,4 +1,4 @@
-package task4.lesson10;
+package task4;
 
 public class TemperatureConverter {
     public double convertFtoC(double degreesFahrenheit) {

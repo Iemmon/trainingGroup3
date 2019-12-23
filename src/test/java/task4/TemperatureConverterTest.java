@@ -1,4 +1,4 @@
-package task4.lesson10;
+package task4;
 
 import org.junit.Before;
 import org.junit.Test;
