@@ -22,17 +22,16 @@ public class TestRunner {
         for (Method beforeAllM : beforeAllMethods){
             beforeAllM.invoke(object);
         }
-        for(Method m : methods){
-            if(m.equals(BeforeAll.class)){
-                m.invoke(object);
-                break;
-            }
-        }
         for (Method testMethod : testMethods) {
             for(Method beforeMethod : beforeMethods){
                 beforeMethod.invoke(object);
             }
+            if(testMethod.isAnnotationPresent(Test.class)){
+                Test test = testMethod.getAnnotation(Test.class);
+                System.out.println(test.expectedMessage());
+            }
             testMethod.invoke(object);
+
             for (Method afterMethod : afterMethods){
                 afterMethod.invoke(object);
             }

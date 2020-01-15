@@ -23,7 +23,7 @@ public class MyTest {
         System.out.println("after");
     }
 
-    @Test
+    @Test(expectedMessage = "annotation text")
     public void test1(){
         System.out.println("test1");
     }
