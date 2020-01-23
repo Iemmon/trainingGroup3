@@ -1,6 +1,9 @@
-package classwork.bank.repository;
+package classwork.bank.repository.implementation;
 
 import classwork.bank.domain.Account;
+import classwork.bank.repository.AccountRepository;
+import classwork.bank.repository.Page;
+import classwork.bank.repository.Pageable;
 
 import java.util.*;
 
@@ -19,8 +22,18 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public List<Account> findAll() {
-        return new ArrayList<>(accountMap.values());
+    public Pageable<Account> findAll(Page page) {
+        return null;
+    }
+
+    @Override
+    public List<Account> findAll(int page, int itemsPerPage) {
+        return null;
+    }
+
+    @Override
+    public long count() {
+        return 0;
     }
 
     @Override

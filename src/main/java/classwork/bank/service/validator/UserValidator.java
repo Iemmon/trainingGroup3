@@ -6,8 +6,9 @@ public class UserValidator implements Validator<User> {
 
     @Override
     public boolean validate(User entity) {
-        System.out.println("validate" + validateEmail(entity.getEmail()));
-        return validateEmail(entity.getEmail()) && validatePassword(entity.getEmail());
+        System.out.println(entity.getEmail() + ": "+validateEmail(entity.getEmail()));
+        System.out.println(entity.getPassword() + ": " +validatePassword(entity.getPassword()));
+        return validateEmail(entity.getEmail()) && validatePassword(entity.getPassword());
     }
 
     public boolean validateEmail(String email){

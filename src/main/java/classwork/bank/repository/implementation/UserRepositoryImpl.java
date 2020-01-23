@@ -1,8 +1,12 @@
-package classwork.bank.repository;
+package classwork.bank.repository.implementation;
 
 import classwork.bank.domain.User;
+import classwork.bank.repository.Page;
+import classwork.bank.repository.Pageable;
+import classwork.bank.repository.UserRepository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class UserRepositoryImpl implements UserRepository {
@@ -22,6 +26,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Optional<User> findByEmail(String email) {
+        //validate email
         return userMap.values()
                 .stream()
                 .filter(user -> user.getEmail().equals(email))
@@ -34,8 +39,28 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> findAll() {
-            return new ArrayList<>(userMap.values());
+    public Pageable<User> findAll(Page page) {
+
+        int maxPages = userMap.size() / page.getItemsPerPage() + 1;
+        List<User> items = findAll(page.getPageNumber(), page.getItemsPerPage());
+        return new Pageable<User>(items, page.getPageNumber(), page.getItemsPerPage(), maxPages);
+    }
+
+    @Override
+    public List<User> findAll(int page, int itemsPerPage) {
+        if(page < 1) page = 1;;
+        int maxPages = userMap.size() / itemsPerPage + 1;
+        if(page > maxPages) page = maxPages;
+        return userMap.values()
+                .stream()
+                .skip(page * itemsPerPage)
+                .limit(itemsPerPage)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public long count() {
+        return userMap.size();
     }
 
     @Override

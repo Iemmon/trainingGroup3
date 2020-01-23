@@ -1,7 +1,9 @@
 package classwork.bank.domain;
 
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 import static classwork.bank.utility.CollectionUtility.nullSafeListInit;
 
@@ -18,6 +20,9 @@ public class User implements Comparable<User>{
         this.password = builder.password;
         this.accounts = nullSafeListInit(builder.accounts);
         //TODO:
+//        byte[] array = new byte[7];
+//        new Random().nextBytes(array);
+//        salt = new String(array, Charset.forName("UTF-8"));
         salt = "aaa";
     }
 
