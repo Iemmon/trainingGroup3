@@ -52,8 +52,8 @@ public class Controller {
                     pass = InputUtility.getUserData();
 
                     final User user1 = User.builder()
-                            .withEmail("email@gmail.com")
-                            .withPassword("Password$1")
+                            .withEmail(email)
+                            .withPassword(pass)
                             .withAccounts(null)
                             .build();
                     isSignedUp = userService.login(email, pass);
