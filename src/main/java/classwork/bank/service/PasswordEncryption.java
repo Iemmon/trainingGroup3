@@ -6,7 +6,7 @@ import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
-public class PasswordEncryptor {
+public class PasswordEncryption {
 
     private static final int strength = 65536;
     private static final int length = 128;

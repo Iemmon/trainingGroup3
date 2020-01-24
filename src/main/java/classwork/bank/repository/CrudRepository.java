@@ -6,7 +6,7 @@ import java.util.Optional;
 public interface CrudRepository<E> {
     void save(E entity);
 
-    Optional<E> findById(Integer id);
+    Optional<E> findById(Long id);
 
     Pageable<E> findAll(Page page);
 

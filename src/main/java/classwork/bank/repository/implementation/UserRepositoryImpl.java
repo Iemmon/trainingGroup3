@@ -8,12 +8,10 @@ import classwork.bank.repository.UserRepository;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
 public class UserRepositoryImpl implements UserRepository {
 
-    private int idCounter = 1;
-    private final Map<Integer, User> userMap = new HashMap<>();
-
+    private final Map<Long, User> userMap = new HashMap<>();
+    private long idCounter = 1;
 
     @Override
     public void save(User entity) {
@@ -34,23 +32,23 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<User> findById(Integer id) {
+    public Optional<User> findById(Long id) {
         return Optional.ofNullable(userMap.get(id));
     }
 
     @Override
     public Pageable<User> findAll(Page page) {
-
-        int maxPages = userMap.size() / page.getItemsPerPage() + 1;
+        int maxPages = userMap.size() / page.getItemsPerPage() - 1;
         List<User> items = findAll(page.getPageNumber(), page.getItemsPerPage());
         return new Pageable<User>(items, page.getPageNumber(), page.getItemsPerPage(), maxPages);
     }
 
     @Override
     public List<User> findAll(int page, int itemsPerPage) {
-        if(page < 1) page = 1;;
-        int maxPages = userMap.size() / itemsPerPage + 1;
-        if(page > maxPages) page = maxPages;
+        int maxPage = (userMap.size() - 1) / itemsPerPage;
+        page = Math.max(page, 0);
+        page = Math.min(page, maxPage);
+
         return userMap.values()
                 .stream()
                 .skip(page * itemsPerPage)

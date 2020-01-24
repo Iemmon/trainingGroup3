@@ -8,7 +8,7 @@ import java.util.Random;
 import static classwork.bank.utility.CollectionUtility.nullSafeListInit;
 
 public class User implements Comparable<User>{
-    private Integer id;
+    private Long id;
     private String email;
     private String password;
     private List<Account> accounts;
@@ -19,14 +19,13 @@ public class User implements Comparable<User>{
         this.email = builder.email;
         this.password = builder.password;
         this.accounts = nullSafeListInit(builder.accounts);
-        //TODO:
-//        byte[] array = new byte[7];
-//        new Random().nextBytes(array);
-//        salt = new String(array, Charset.forName("UTF-8"));
-        salt = "aaa";
+        byte[] array = new byte[7];
+        new Random().nextBytes(array);
+        salt = new String(array, Charset.forName("UTF-8"));
+        //salt = "aaa";
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -46,7 +45,7 @@ public class User implements Comparable<User>{
         return salt;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -94,11 +93,11 @@ public class User implements Comparable<User>{
 
     @Override
     public int compareTo(User o) {
-        return this.id - o.id;
+        return (int) (this.id - o.id);
     }
 
     public static class Builder {
-        private Integer id;
+        private Long id;
         private String email;
         private String password;
         private List<Account> accounts;
@@ -110,7 +109,7 @@ public class User implements Comparable<User>{
             return new User(this);
         }
 
-        public Builder withId(Integer id) {
+        public Builder withId(Long id) {
             this.id = id;
             return this;
         }

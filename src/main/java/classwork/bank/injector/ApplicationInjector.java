@@ -1,6 +1,6 @@
 package classwork.bank.injector;
 
-import classwork.bank.View;
+import classwork.bank.view.View;
 import classwork.bank.domain.User;
 import classwork.bank.repository.UserRepository;
 import classwork.bank.repository.implementation.UserRepositoryImpl;
@@ -13,7 +13,7 @@ public class ApplicationInjector {
 
     private static final Validator<User> USER_VALIDATOR = new UserValidator();
 
-    private static final PasswordEncryptor PASSWORD_ENCRYPTOR = new PasswordEncryptor();
+    private static final PasswordEncryption PASSWORD_ENCRYPTOR = new PasswordEncryption();
 
     private static final UserRepository USER_REPOSITORY = new UserRepositoryImpl();
 
@@ -31,11 +31,8 @@ public class ApplicationInjector {
         return USER_SERVICE;
     }
 
-    public UserRepository getUserRepository(){
-        return USER_REPOSITORY;
-    }
-
     public View getView() {
         return VIEW;
     }
+
 }

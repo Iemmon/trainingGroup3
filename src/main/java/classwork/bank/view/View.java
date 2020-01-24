@@ -1,4 +1,4 @@
-package classwork.bank;
+package classwork.bank.view;
 
 public class View {
 

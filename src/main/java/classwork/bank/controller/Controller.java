@@ -1,5 +1,6 @@
-package classwork.bank;
+package classwork.bank.controller;
 
+import classwork.bank.view.View;
 import classwork.bank.domain.User;
 import classwork.bank.injector.ApplicationInjector;
 import classwork.bank.service.UserService;
@@ -9,16 +10,14 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Controller {
+    private final ApplicationInjector injector = ApplicationInjector.getInstance();
+    private final UserService userService = injector.getUserService();
+    private final View view = injector.getView();
 
-    final ApplicationInjector injector = ApplicationInjector.getInstance();
-    final UserService userService = injector.getUserService();
-    final View view = injector.getView();
-
-    Locale locale = Locale.getDefault();
-    ResourceBundle bundle = ResourceBundle.getBundle("properties", locale);
+    private Locale locale = Locale.getDefault();
+    private ResourceBundle bundle = ResourceBundle.getBundle("properties", locale);
 
     public void run() {
-        setDefaultUsers();
         view.print(bundle.getString("choose-language-message"));
         int userInput = InputUtility.getValidMenuNumber(2);
         if (userInput == 1) {
@@ -31,9 +30,9 @@ public class Controller {
         );
         switch (InputUtility.getValidMenuNumber(4)) {
             case 1:
-                String email = "";
-                String pass = "";
-                boolean isLoggedIn = false;
+                String email;
+                String pass;
+                boolean isLoggedIn;
                 do {
                     view.print(bundle.getString("enter-email"));
                     email = InputUtility.getUserData();
@@ -44,7 +43,7 @@ public class Controller {
                 view.print(bundle.getString("login-success"));
                 break;
             case 2:
-                boolean isSignedUp = false;
+                boolean isSignedUp;
                 do {
                     view.print(bundle.getString("enter-email"));
                     email = InputUtility.getUserData();
@@ -56,7 +55,7 @@ public class Controller {
                             .withPassword(pass)
                             .withAccounts(null)
                             .build();
-                    isSignedUp = userService.login(email, pass);
+                    isSignedUp = userService.register(user1);
                 } while (isSignedUp);
                 break;
             case 3:
@@ -64,22 +63,6 @@ public class Controller {
             case 4:
                 view.print(bundle.getString("exit"));
                 System.exit(0);
-
-
         }
-    }
-
-    private void setDefaultUsers() {
-        final User user1 = User.builder()
-                .withEmail("email@gmail.com")
-                .withPassword("Password$1")
-                .withAccounts(null)
-                .build();
-
-        final User user2 = User.builder()
-                .withEmail("useremail@gmail.com")
-                .withPassword("qweTty%111")
-                .withAccounts(null)
-                .build();
     }
 }

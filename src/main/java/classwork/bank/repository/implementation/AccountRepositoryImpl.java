@@ -17,7 +17,7 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public Optional<Account> findById(Integer id) {
+    public Optional<Account> findById(Long id) {
         return Optional.ofNullable(accountMap.get(id));
     }
 
