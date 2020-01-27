@@ -7,15 +7,11 @@ public class InputUtility {
     private static final Scanner sc = new Scanner(System.in);
 
     public static int getValidMenuNumber(int numOfOptions) {
-        int input;
-        boolean isWrong = false;
-        do {
-            System.out.println("Choose menu number from above:");
-            input = sc.nextInt();
-            isWrong = input > 0 && input <= numOfOptions;
-
-        } while (!sc.hasNextInt() && !isWrong);
-        return input;
+        String input;
+        boolean isCorrect = false;
+        System.out.println("Choose menu number from above:");
+        input = sc.nextLine();
+        return input.contentEquals("1") ? 1 : 2;
     }
 
     public static String getUserData() {

@@ -13,11 +13,11 @@ public class ApplicationInjector {
 
     private static final Validator<User> USER_VALIDATOR = new UserValidator();
 
-    private static final PasswordEncryption PASSWORD_ENCRYPTOR = new PasswordEncryption();
+    private static final PasswordEncryption PASSWORD_ENCRYPTION = new PasswordEncryption();
 
     private static final UserRepository USER_REPOSITORY = new UserRepositoryImpl();
 
-    private static final UserService USER_SERVICE = new UserServiceImpl(USER_REPOSITORY, PASSWORD_ENCRYPTOR, USER_VALIDATOR);
+    private static final UserService USER_SERVICE = new UserServiceImpl(USER_REPOSITORY, PASSWORD_ENCRYPTION, USER_VALIDATOR);
     private static final View VIEW = new View();
 
     private ApplicationInjector() {
